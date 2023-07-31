@@ -5,6 +5,7 @@ import FastImage from 'react-native-fast-image';
 import styles from './styles';
 import {currencyFormat} from '../../../utils/currency/currencyFormat';
 import {getCurrencyImageUrl} from '../../../utils/crypto/getUrlImage';
+import PrinceChange from '../../atoms/PrinceChange';
 
 export interface Crypto {
   id: string;
@@ -25,24 +26,11 @@ const CryptoItem = ({
 }: CryptoItemProps) => {
   const [errorImage, setErrorImage] = useState(false);
   const formatPrice = useMemo(() => currencyFormat(price), [price]);
-  const isPositive = useMemo(() => lastHourChange >= 0, [lastHourChange]);
-  const lastHourChangeSign = useMemo(
-    () => (isPositive ? '+' : ''),
-    [isPositive],
-  );
-  const lastHourChangeColor = useMemo(
-    () => (isPositive ? 'green' : 'red'),
-    [isPositive],
-  );
 
   const currencyUrlImage = useMemo(
     () => getCurrencyImageUrl(abbreviation),
     [abbreviation],
   );
-
-  React.useEffect(() => {
-    console.log(currencyUrlImage);
-  }, [currencyUrlImage]);
 
   const {
     colors: {backdrop},
@@ -69,9 +57,7 @@ const CryptoItem = ({
         </View>
         <View style={styles.rightContent}>
           <Paragraph>{`USD ${formatPrice}`}</Paragraph>
-          <Paragraph style={{color: lastHourChangeColor}}>
-            {`${lastHourChangeSign}${lastHourChange}%`}
-          </Paragraph>
+          <PrinceChange lastChangePercent={lastHourChange} />
         </View>
       </View>
     </View>
