@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Crypto} from '../../components/atoms/CryptoItem';
+import {Crypto} from '../../components/molecules/CryptoItem';
 import CryptoListTemplate from '../../components/templates/CryptoListTemplate';
 
 const CryptoListScreen = () => {

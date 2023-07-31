@@ -1,7 +1,7 @@
 import React from 'react';
 import {View} from 'react-native';
-import CryptoList from '../../molecules/CryptoList';
-import {Crypto} from '../../atoms/CryptoItem';
+import CryptoList from '../../organisms/CryptoList';
+import {Crypto} from '../../molecules/CryptoItem';
 
 interface CryptoListTemplateProps {
   data: Crypto[];

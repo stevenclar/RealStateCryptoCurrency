@@ -23,4 +23,8 @@ export default StyleSheet.create({
   titleContainer: {
     marginLeft: 12,
   },
+  image: {
+    width: 40,
+    height: 40,
+  },
 });

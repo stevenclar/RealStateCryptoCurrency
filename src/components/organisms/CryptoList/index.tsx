@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {FlatList, View} from 'react-native';
 import {Divider} from 'react-native-paper';
-import CryptoItem, {Crypto} from '../../atoms/CryptoItem';
+import CryptoItem, {Crypto} from '../../molecules/CryptoItem';
 import TextInput from '../../atoms/TextInput';
 import styles from './styles';
 import {debounce} from 'lodash';
