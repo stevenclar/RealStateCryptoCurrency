@@ -8,7 +8,6 @@ import CryptoImage from '../../atoms/CryptoImage';
 
 export interface Crypto {
   id: string;
-  icon: string;
   abbreviation: string;
   name: string;
   price: number;
@@ -40,7 +39,10 @@ const CryptoItem = ({
         </View>
         <View style={styles.rightContent}>
           <Paragraph>{`USD ${formatPrice}`}</Paragraph>
-          <PrinceChange lastChangePercent={lastHourChange} />
+          <PrinceChange
+            lastChangePercent={lastHourChange}
+            testID="prince-change"
+          />
         </View>
       </View>
     </View>
