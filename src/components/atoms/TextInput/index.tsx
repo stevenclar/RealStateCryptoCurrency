@@ -30,6 +30,7 @@ const TextInput: React.FC<TextInputProps> = forwardRef(
     const rightNode = useMemo(() => {
       return secureTextEntry ? (
         <TextInputPaper.Icon
+          testID="eye-icon"
           icon={hide ? 'eye-off' : 'eye'}
           onPress={() => setHide(!hide)}
           color={primary}
@@ -37,6 +38,7 @@ const TextInput: React.FC<TextInputProps> = forwardRef(
         />
       ) : right ? (
         <TextInputPaper.Icon
+          testID="custom-icon"
           icon={right}
           color={primary}
           size={24}
@@ -46,13 +48,10 @@ const TextInput: React.FC<TextInputProps> = forwardRef(
       ) : null;
     }, [secureTextEntry, right, hide, primary, rightAction]);
 
-    React.useEffect(() => {
-      console.log(rightNode);
-    }, [rightNode]);
-
     return (
       <View style={containerStyle}>
         <TextInputPaper
+          testID="text-input"
           autoComplete="off"
           mode="outlined"
           right={rightNode}

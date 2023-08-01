@@ -1,7 +1,7 @@
 import React, {useMemo, useState} from 'react';
 import FastImage from 'react-native-fast-image';
 import {Avatar} from 'react-native-paper';
-import {getCurrencyImageUrl} from '../../../utils/crypto/getUrlImage';
+import {getCurrencyImageUrl} from '../../../utils/crypto/getCurrencyImageUrl';
 
 interface CryptoImageProps {
   abbreviation: string;
@@ -10,7 +10,7 @@ interface CryptoImageProps {
 }
 
 const CryptoImage = ({abbreviation, width, height}: CryptoImageProps) => {
-  const [errorImage, setErrorImage] = useState(false);
+  const [errorImage, setErrorImage] = useState(!abbreviation);
   const currencyUrlImage = useMemo(
     () => getCurrencyImageUrl(abbreviation),
     [abbreviation],
@@ -19,6 +19,7 @@ const CryptoImage = ({abbreviation, width, height}: CryptoImageProps) => {
     <>
       {currencyUrlImage && !errorImage && (
         <FastImage
+          testID="crypto-image"
           source={{uri: currencyUrlImage}}
           resizeMode={FastImage.resizeMode.contain}
           onError={() => {
@@ -27,7 +28,9 @@ const CryptoImage = ({abbreviation, width, height}: CryptoImageProps) => {
           style={{width, height}}
         />
       )}
-      {errorImage && <Avatar.Icon size={width} icon="bitcoin" />}
+      {errorImage && (
+        <Avatar.Icon size={width} icon="bitcoin" testID="crypto-avatar" />
+      )}
     </>
   );
 };
@@ -35,6 +38,7 @@ const CryptoImage = ({abbreviation, width, height}: CryptoImageProps) => {
 CryptoImage.defaultProps = {
   width: 40,
   height: 40,
+  abbreviation: null,
 };
 
 export default CryptoImage;

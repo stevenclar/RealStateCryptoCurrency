@@ -4,6 +4,7 @@ import {styles} from './styles';
 
 const Button = ({
   loading,
+  disabled,
   onPress,
   contentStyle,
   labelStyle,
@@ -11,8 +12,9 @@ const Button = ({
 }: ButtonProps) => {
   return (
     <PaperButton
-      onPress={loading ? () => {} : onPress}
+      onPress={onPress}
       loading={loading}
+      disabled={loading || disabled}
       contentStyle={[contentStyle]}
       labelStyle={[styles.label, labelStyle]}
       {...rest}
@@ -21,8 +23,8 @@ const Button = ({
 };
 
 Button.defaultProps = {
-  uppercase: false,
   mode: 'contained',
+  onPress: () => {},
 };
 
 export default Button;
