@@ -2,6 +2,10 @@ import React from 'react';
 import {render} from '@testing-library/react-native';
 import CryptoItem from '.';
 
+jest.mock('@react-navigation/native', () => ({
+  useNavigation: () => ({navigate: jest.fn()}),
+}));
+
 const cryptoMock = {
   id: '1',
   abbreviation: 'BTC',
