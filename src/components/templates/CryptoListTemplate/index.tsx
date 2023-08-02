@@ -1,16 +1,15 @@
 import React from 'react';
 import {View} from 'react-native';
 import CryptoList from '../../organisms/CryptoList';
-import {CryptoCurrency} from '../../../interfaces/CryptoCurrency';
 
 interface CryptoListTemplateProps {
-  data: CryptoCurrency[];
+  loadMore?: () => void;
 }
 
-const CryptoListTemplate = ({data}: CryptoListTemplateProps) => {
+const CryptoListTemplate = ({loadMore}: CryptoListTemplateProps) => {
   return (
     <View>
-      <CryptoList data={data} />
+      <CryptoList loadMore={loadMore} />
     </View>
   );
 };

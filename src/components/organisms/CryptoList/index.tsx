@@ -1,26 +1,31 @@
-import React, {useCallback, useEffect, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {FlatList, View} from 'react-native';
-import {Divider, Text, useTheme} from 'react-native-paper';
+import {ActivityIndicator, Divider} from 'react-native-paper';
 import CryptoItem from '../../molecules/CryptoItem';
 import TextInput from '../../atoms/TextInput';
 import styles from './styles';
 import {debounce} from 'lodash';
-import {CryptoCurrency} from '../../../interfaces/CryptoCurrency';
+import {useAppSelector} from '../../../store/hooks';
+import ListFooter from '../../atoms/ListFooter';
 
 interface CryptoListProps {
-  data: CryptoCurrency[];
   loadMore?: () => void;
 }
 
-const CryptoList = ({data, loadMore}: CryptoListProps) => {
-  const [filteredData, setFilteredData] = useState(data);
-  const [searchQuery, setSearchQuery] = useState('B');
+const CryptoList = ({loadMore}: CryptoListProps) => {
+  const cryptoCurrencies = useAppSelector(
+    state => state.cryptoCurrencies.cryptoCurrencies,
+  );
+  const status = useAppSelector(state => state.cryptoCurrencies.status);
+  const isListEnding = useAppSelector(
+    state => state.cryptoCurrencies.isListEnding,
+  );
+  const [filteredData, setFilteredData] = useState(cryptoCurrencies);
+  const [searchQuery, setSearchQuery] = useState('');
 
-  const {
-    colors: {outline},
-  } = useTheme();
+  const isLoading = useMemo(() => status === 'loading', [status]);
 
-  const dataRef = useRef(data);
+  const dataRef = useRef(cryptoCurrencies);
 
   const handleFilterRef = useRef(
     debounce((text: string) => {
@@ -48,28 +53,10 @@ const CryptoList = ({data, loadMore}: CryptoListProps) => {
   }, [searchQuery]);
 
   useEffect(() => {
-    dataRef.current = data;
+    dataRef.current = cryptoCurrencies;
     handleFilter(searchQuery);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data]);
-
-  const renderListEndComponent = useCallback(() => {
-    return (
-      <View>
-        <Divider />
-        <Text
-          style={{...styles.listFooter, color: outline}}
-          variant="labelSmall">
-          No more crypto currency at the moment
-        </Text>
-      </View>
-    );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const renderListEmptyComponent = useCallback(() => {
-    return <Text>No crypto currency found</Text>;
-  }, []);
+  }, [cryptoCurrencies]);
 
   return (
     <View style={styles.container}>
@@ -87,11 +74,10 @@ const CryptoList = ({data, loadMore}: CryptoListProps) => {
         ItemSeparatorComponent={MemoizedSpacerComponent}
         keyExtractor={item => item.id.toString()}
         style={styles.list}
-        ListFooterComponent={renderListEndComponent}
-        ListEmptyComponent={renderListEmptyComponent}
-        onEndReachedThreshold={0.5}
         onEndReached={loadMore}
+        ListFooterComponent={<ListFooter isListEnding={isListEnding} />}
       />
+      {isLoading && <ActivityIndicator />}
     </View>
   );
 };

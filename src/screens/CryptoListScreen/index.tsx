@@ -1,30 +1,31 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import CryptoListTemplate from '../../components/templates/CryptoListTemplate';
-import {CryptoCurrency} from '../../interfaces/CryptoCurrency';
 import CryptoCurrencyService from '../../services/crypto';
 import useInject from '../../container/useInject';
+import {useAppDispatch, useAppSelector} from '../../store/hooks';
+import {fetchCryptoCurrency} from '../../store/cryptoCurrency/cryptoCurrencySlice';
 
 const CryptoListScreen = () => {
+  const dispatch = useAppDispatch();
   const cryptoCurrencyService = useInject<CryptoCurrencyService>(
     'cryptoCurrencyService',
   );
-  const [cryptoData, setCryptoData] = useState<CryptoCurrency[]>([]);
+  const isListEnding = useAppSelector(
+    state => state.cryptoCurrencies.isListEnding,
+  );
   const [page, setPage] = useState(0);
-  const [hasMore, setHasMore] = useState(true);
 
   const getCryptoCurrencies = useCallback(
     async (currentPage: number) => {
-      if (hasMore) {
-        const data = await cryptoCurrencyService.getCryptoCurrencies(
-          currentPage,
+      if (!isListEnding) {
+        dispatch(
+          fetchCryptoCurrency(
+            cryptoCurrencyService.getCryptoCurrencies(currentPage),
+          ),
         );
-        if (data.length === 0) {
-          setHasMore(false);
-        }
-        setCryptoData([...cryptoData, ...data]);
       }
     },
-    [cryptoCurrencyService, cryptoData, hasMore],
+    [cryptoCurrencyService, dispatch, isListEnding],
   );
 
   useEffect(() => {
@@ -36,7 +37,7 @@ const CryptoListScreen = () => {
     setPage(page + 1);
   }, [page]);
 
-  return <CryptoListTemplate data={cryptoData} loadMore={handleLoadMore} />;
+  return <CryptoListTemplate loadMore={handleLoadMore} />;
 };
 
 export default CryptoListScreen;
