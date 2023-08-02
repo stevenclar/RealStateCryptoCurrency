@@ -1,29 +1,30 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import CryptoListTemplate from '../../components/templates/CryptoListTemplate';
 import {CryptoCurrency} from '../../interfaces/CryptoCurrency';
+import CryptoCurrencyService from '../../services/crypto';
+import useInject from '../../container/useInject';
 
 const CryptoListScreen = () => {
+  const cryptoCurrencyService = useInject<CryptoCurrencyService>(
+    'cryptoCurrencyService',
+  );
   const [cryptoData, setCryptoData] = useState<CryptoCurrency[]>([]);
+  const [page, setPage] = useState(0);
+
+  const getCryptoCurrencies = useCallback(
+    async (currentPage: number) => {
+      const data = await cryptoCurrencyService.getCryptoCurrencies(currentPage);
+      console.log({data});
+      setCryptoData([...cryptoData, ...data]);
+    },
+    [cryptoCurrencyService, cryptoData],
+  );
 
   useEffect(() => {
-    const dummyCryptoList: CryptoCurrency[] = [
-      {
-        id: '1',
-        abbreviation: 'BTC',
-        name: 'Bitcoin',
-        price: 42000,
-        lastHourChange: 0.5,
-      },
-      {
-        id: '2',
-        abbreviation: 'ETH',
-        name: 'Ethereum',
-        price: 2800,
-        lastHourChange: -0.2,
-      },
-    ];
-    setCryptoData(dummyCryptoList);
-  }, []);
+    getCryptoCurrencies(page);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page]);
+
   return <CryptoListTemplate data={cryptoData} />;
 };
 

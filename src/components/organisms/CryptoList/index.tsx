@@ -13,7 +13,7 @@ interface CryptoListProps {
 
 const CryptoList = ({data}: CryptoListProps) => {
   const [filteredData, setFilteredData] = useState(data);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState('B');
 
   const dataRef = useRef(data);
 
@@ -43,6 +43,8 @@ const CryptoList = ({data}: CryptoListProps) => {
 
   useEffect(() => {
     dataRef.current = data;
+    handleFilter(searchQuery);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   return (
