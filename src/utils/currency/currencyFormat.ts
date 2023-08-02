@@ -7,3 +7,9 @@ export const currencyFormat = (value: number) => {
     currency: 'USD',
   });
 };
+
+export const formatNumberToKMB = (value: number) =>
+  value.toLocaleString('en-US', {
+    notation: 'compact',
+    compactDisplay: 'short',
+  });
