@@ -8,4 +8,8 @@ export default StyleSheet.create({
   list: {
     width: '100%',
   },
+  listFooter: {
+    marginTop: 8,
+    textAlign: 'center',
+  },
 });

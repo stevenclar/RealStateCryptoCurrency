@@ -1,11 +1,14 @@
 import {CryptoCurrency} from '../../interfaces/CryptoCurrency';
 import CryptoCurrencyService from '.';
 
+const LIMIT = 40;
+
 class CoinloreCryptoCurrencyService implements CryptoCurrencyService {
   async getCryptoCurrencies(page = 0): Promise<CryptoCurrency[]> {
     try {
+      const start = page * LIMIT;
       const response = await fetch(
-        `https://api.coinlore.net/api/tickers/?start=${page}&limit=40`,
+        `https://api.coinlore.net/api/tickers/?start=${start}&limit=40`,
       );
       if (!response.ok) {
         throw new Error('Failed to fetch getCurrencies');

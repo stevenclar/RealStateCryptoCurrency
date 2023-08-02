@@ -10,14 +10,21 @@ const CryptoListScreen = () => {
   );
   const [cryptoData, setCryptoData] = useState<CryptoCurrency[]>([]);
   const [page, setPage] = useState(0);
+  const [hasMore, setHasMore] = useState(true);
 
   const getCryptoCurrencies = useCallback(
     async (currentPage: number) => {
-      const data = await cryptoCurrencyService.getCryptoCurrencies(currentPage);
-      console.log({data});
-      setCryptoData([...cryptoData, ...data]);
+      if (hasMore) {
+        const data = await cryptoCurrencyService.getCryptoCurrencies(
+          currentPage,
+        );
+        if (data.length === 0) {
+          setHasMore(false);
+        }
+        setCryptoData([...cryptoData, ...data]);
+      }
     },
-    [cryptoCurrencyService, cryptoData],
+    [cryptoCurrencyService, cryptoData, hasMore],
   );
 
   useEffect(() => {
@@ -25,7 +32,11 @@ const CryptoListScreen = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
-  return <CryptoListTemplate data={cryptoData} />;
+  const handleLoadMore = useCallback(() => {
+    setPage(page + 1);
+  }, [page]);
+
+  return <CryptoListTemplate data={cryptoData} loadMore={handleLoadMore} />;
 };
 
 export default CryptoListScreen;
