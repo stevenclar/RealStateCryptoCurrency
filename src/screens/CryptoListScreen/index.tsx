@@ -9,7 +9,6 @@ const CryptoListScreen = () => {
     const dummyCryptoList: Crypto[] = [
       {
         id: '1',
-        icon: 'bitcoin',
         abbreviation: 'BTC',
         name: 'Bitcoin',
         price: 42000,
@@ -17,7 +16,6 @@ const CryptoListScreen = () => {
       },
       {
         id: '2',
-        icon: 'ethereum',
         abbreviation: 'ETH',
         name: 'Ethereum',
         price: 2800,
