@@ -3,7 +3,7 @@ import {View} from 'react-native';
 import {Title, Paragraph, useTheme} from 'react-native-paper';
 import styles from './styles';
 import {currencyFormat} from '../../../utils/currency/currencyFormat';
-import PrinceChange from '../../atoms/PrinceChange';
+import PriceChange from '../../atoms/PriceChange';
 import CryptoImage from '../../atoms/CryptoImage';
 
 export interface Crypto {
@@ -39,9 +39,9 @@ const CryptoItem = ({
         </View>
         <View style={styles.rightContent}>
           <Paragraph>{`USD ${formatPrice}`}</Paragraph>
-          <PrinceChange
+          <PriceChange
             lastChangePercent={lastHourChange}
-            testID="prince-change"
+            testID="price-change"
           />
         </View>
       </View>

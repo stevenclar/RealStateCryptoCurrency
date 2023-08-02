@@ -1,12 +1,13 @@
 import React, {useMemo} from 'react';
 import {Paragraph} from 'react-native-paper';
 
-interface PrinceChangeProps {
+interface PriceChangeProps {
   lastChangePercent: number;
   testID?: string;
+  style?: any;
 }
 
-const PrinceChange = ({lastChangePercent, testID}: PrinceChangeProps) => {
+const PriceChange = ({lastChangePercent, style, testID}: PriceChangeProps) => {
   const hasGoneUp = useMemo(() => lastChangePercent > 0, [lastChangePercent]);
   const lastChangeSign = useMemo(() => (hasGoneUp ? '+' : ''), [hasGoneUp]);
   const lastChangeColor = useMemo(
@@ -15,10 +16,14 @@ const PrinceChange = ({lastChangePercent, testID}: PrinceChangeProps) => {
   );
 
   return (
-    <Paragraph style={{color: lastChangeColor}} testID={testID}>
+    <Paragraph style={{color: lastChangeColor, ...style}} testID={testID}>
       {`${lastChangeSign}${lastChangePercent}%`}
     </Paragraph>
   );
 };
 
-export default PrinceChange;
+PriceChange.defaultProps = {
+  style: {},
+};
+
+export default PriceChange;

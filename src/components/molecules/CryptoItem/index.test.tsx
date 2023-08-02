@@ -17,11 +17,11 @@ describe('CryptoItem', () => {
     const abbreviation = getByText('BTC');
     const name = getByText('Bitcoin');
     const price = getByText('USD $45,000.00');
-    const princeChange = getByTestId('prince-change');
+    const priceChange = getByTestId('price-change');
 
     expect(abbreviation).toBeTruthy();
     expect(name).toBeTruthy();
     expect(price).toBeTruthy();
-    expect(princeChange).toBeTruthy();
+    expect(priceChange).toBeTruthy();
   });
 });
