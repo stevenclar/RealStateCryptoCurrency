@@ -7,16 +7,9 @@ import PriceChange from '../../atoms/PriceChange';
 import CryptoImage from '../../atoms/CryptoImage';
 import {useNavigation} from '@react-navigation/native';
 import {ScreenNavigationProp} from '../../../utils/navigation/navigationProps';
+import {CryptoCurrency} from '../../../interfaces/CryptoCurrency';
 
-export interface Crypto {
-  id: string;
-  abbreviation: string;
-  name: string;
-  price: number;
-  lastHourChange: number;
-}
-
-interface CryptoItemProps extends Crypto {}
+interface CryptoItemProps extends CryptoCurrency {}
 
 const CryptoItem = ({
   abbreviation,

@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {Crypto} from '../../components/molecules/CryptoItem';
 import CryptoListTemplate from '../../components/templates/CryptoListTemplate';
+import {CryptoCurrency} from '../../interfaces/CryptoCurrency';
 
 const CryptoListScreen = () => {
-  const [cryptoData, setCryptoData] = useState<Crypto[]>([]);
+  const [cryptoData, setCryptoData] = useState<CryptoCurrency[]>([]);
 
   useEffect(() => {
-    const dummyCryptoList: Crypto[] = [
+    const dummyCryptoList: CryptoCurrency[] = [
       {
         id: '1',
         abbreviation: 'BTC',

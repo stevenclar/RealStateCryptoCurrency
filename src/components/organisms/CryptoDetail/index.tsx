@@ -1,5 +1,4 @@
 import React, {useMemo, useState} from 'react';
-import {Crypto} from '../../molecules/CryptoItem';
 import {View} from 'react-native';
 import CryptoImage from '../../atoms/CryptoImage';
 import {Divider, Text, useTheme} from 'react-native-paper';
@@ -11,8 +10,9 @@ import {
 } from '../../../utils/currency/currencyFormat';
 import Spacer from '../../atoms/Spacer';
 import LineChart from '../../atoms/LineChart';
+import {CryptoCurrency} from '../../../interfaces/CryptoCurrency';
 
-const mockCrypto: Crypto = {
+const mockCrypto: CryptoCurrency = {
   id: '1',
   name: 'Bitcoin',
   abbreviation: 'BTC',

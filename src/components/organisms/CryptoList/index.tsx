@@ -1,13 +1,14 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {FlatList, View} from 'react-native';
 import {Divider} from 'react-native-paper';
-import CryptoItem, {Crypto} from '../../molecules/CryptoItem';
+import CryptoItem from '../../molecules/CryptoItem';
 import TextInput from '../../atoms/TextInput';
 import styles from './styles';
 import {debounce} from 'lodash';
+import {CryptoCurrency} from '../../../interfaces/CryptoCurrency';
 
 interface CryptoListProps {
-  data: Crypto[];
+  data: CryptoCurrency[];
 }
 
 const CryptoList = ({data}: CryptoListProps) => {
