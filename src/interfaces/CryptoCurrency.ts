@@ -3,6 +3,7 @@ export interface CryptoCurrency {
   abbreviation: string;
   name: string;
   price: number;
+  rank: number;
   lastHourChange: number;
   percentChange24h?: number;
   percentChange7d?: number;

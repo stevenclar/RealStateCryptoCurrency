@@ -21,8 +21,16 @@ const AppNavigator = () => {
     <NavigationContainer onReady={() => RNBootSplash.hide()} theme={theme}>
       <Stack.Navigator initialRouteName="Welcome">
         <Stack.Screen name="Welcome" component={WelcomeScreen} />
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="CryptoDetails" component={CryptoDetailsScreen} />
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{title: 'Crypto'}}
+        />
+        <Stack.Screen
+          name="CryptoDetails"
+          component={CryptoDetailsScreen}
+          options={{title: 'Crypto Details'}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

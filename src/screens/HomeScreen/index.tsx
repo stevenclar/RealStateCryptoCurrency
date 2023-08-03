@@ -2,8 +2,10 @@ import React from 'react';
 import {BottomNavigation, useTheme} from 'react-native-paper';
 import {styles} from './styles';
 import CryptoListScreen from '../CryptoListScreen';
+import ProfileScreen from '../ProfileScreen';
 
 const HomeRoute = () => <CryptoListScreen />;
+const ProfileRoute = () => <ProfileScreen />;
 
 const HomeScreen = () => {
   const {
@@ -27,7 +29,7 @@ const HomeScreen = () => {
 
   const renderScene = BottomNavigation.SceneMap({
     home: HomeRoute,
-    profile: () => <></>,
+    profile: ProfileRoute,
   });
 
   return (
