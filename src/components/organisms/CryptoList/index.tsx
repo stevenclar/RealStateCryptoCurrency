@@ -7,6 +7,7 @@ import styles from './styles';
 import {debounce} from 'lodash';
 import {useAppSelector} from '../../../store/hooks';
 import ListFooter from '../../atoms/ListFooter';
+import {CurrencyStatus} from '../../../store/cryptoCurrency/cryptoCurrencySlice';
 
 interface CryptoListProps {
   loadMore?: () => void;
@@ -23,7 +24,7 @@ const CryptoList = ({loadMore}: CryptoListProps) => {
   const [filteredData, setFilteredData] = useState(cryptoCurrencies);
   const [searchQuery, setSearchQuery] = useState('');
 
-  const isLoading = useMemo(() => status === 'loading', [status]);
+  const isLoading = useMemo(() => status === CurrencyStatus.LOADING, [status]);
 
   const dataRef = useRef(cryptoCurrencies);
 
@@ -59,15 +60,17 @@ const CryptoList = ({loadMore}: CryptoListProps) => {
   }, [cryptoCurrencies]);
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID="crypto-list">
       <FlatList
+        testID="crypto-flatlist"
         data={filteredData}
         ListHeaderComponent={
           <TextInput
-            placeholder=""
+            placeholder="search"
             onChangeText={setSearchQuery}
             value={searchQuery}
             right="magnify"
+            style={styles.searchInput}
           />
         }
         renderItem={({item}) => <CryptoItem {...item} />}
@@ -77,7 +80,7 @@ const CryptoList = ({loadMore}: CryptoListProps) => {
         onEndReached={loadMore}
         ListFooterComponent={<ListFooter isListEnding={isListEnding} />}
       />
-      {isLoading && <ActivityIndicator />}
+      {isLoading && <ActivityIndicator testID="loading-indicator" />}
     </View>
   );
 };

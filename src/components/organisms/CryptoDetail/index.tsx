@@ -22,33 +22,38 @@ const CryptoDetail = () => {
   );
 
   const formatPrice = useMemo(
-    () => crypto?.price && currencyFormat(crypto?.price),
+    () => crypto?.price && `${currencyFormat(crypto?.price)} USD`,
     [crypto?.price],
   );
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID="crypto-detail">
       <View style={styles.detailsContainer}>
-        <Text style={{color: outline}} variant="headlineLarge">
-          {crypto?.abbreviation}
+        <Text
+          style={{color: outline}}
+          variant="headlineLarge"
+          testID="abbreviation-text">
+          {crypto?.abbreviation ?? 'N/A'}
         </Text>
         <CryptoImage
           abbreviation={crypto?.abbreviation}
           height={70}
           width={70}
         />
-        <Text style={{color: outline}} variant="titleMedium">
-          {crypto?.name}
+        <Text style={{color: outline}} variant="titleMedium" testID="name-text">
+          {crypto?.name ?? 'N/A'}
         </Text>
         <Spacer size={12} />
         {crypto?.lastHourChange && (
           <PriceChange lastChangePercent={crypto.lastHourChange} />
         )}
-        <Text variant="titleLarge">{formatPrice} USD</Text>
+        <Text variant="titleLarge" testID="price-text">
+          {formatPrice ?? 'N/A'}
+        </Text>
       </View>
       <Divider />
       {!!crypto?.historicalData?.length && (
-        <View>
+        <View testID="historical-chart">
           <LineChart
             data={crypto.historicalData}
             strokeColor={secondary}

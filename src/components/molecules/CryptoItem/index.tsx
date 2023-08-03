@@ -30,7 +30,10 @@ const CryptoItem = (cryptoCurrency: CryptoItemProps) => {
     colors: {backdrop},
   } = useTheme();
   return (
-    <TouchableRipple style={styles.container} onPress={handleSelectCrypto}>
+    <TouchableRipple
+      style={styles.container}
+      onPress={handleSelectCrypto}
+      testID="ripple-container">
       <View style={styles.content}>
         <View style={styles.leftContent}>
           <CryptoImage abbreviation={cryptoCurrency.abbreviation} />

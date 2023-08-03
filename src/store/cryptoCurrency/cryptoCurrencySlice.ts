@@ -1,18 +1,26 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {CryptoCurrency} from '../../interfaces/CryptoCurrency';
 
+export enum CurrencyStatus {
+  IDLE = 'idle',
+  LOADING = 'loading',
+  FAILED = 'failed',
+}
+
+type status = 'idle' | 'loading' | 'failed';
+
 export interface CryptoCurrencyState {
   cryptoCurrencies: CryptoCurrency[];
   selectedCurrency: CryptoCurrency | null;
   isListEnding: boolean;
-  status: 'idle' | 'loading' | 'failed';
+  status: status;
 }
 
 const initialState: CryptoCurrencyState = {
   cryptoCurrencies: [],
   selectedCurrency: null,
   isListEnding: false,
-  status: 'idle',
+  status: CurrencyStatus.IDLE,
 };
 
 export const fetchCryptoCurrency = createAsyncThunk(

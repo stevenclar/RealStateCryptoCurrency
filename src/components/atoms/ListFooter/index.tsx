@@ -13,7 +13,7 @@ const ListFooter = ({isListEnding}: ListFooterProps) => {
   } = useTheme();
 
   return (
-    <View>
+    <View testID="list-footer">
       <Divider />
       {isListEnding && (
         <Text

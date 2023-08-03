@@ -2,10 +2,19 @@ import React from 'react';
 import CryptoItem from '.';
 import {CryptoCurrency} from '../../../interfaces/CryptoCurrency';
 import {renderWithProviders} from '../../../../jest/test-utils';
+import {fireEvent} from '@testing-library/react-native';
 
-jest.mock('@react-navigation/native', () => ({
-  useNavigation: () => ({navigate: jest.fn()}),
-}));
+const mockedNavigate = jest.fn();
+
+jest.mock('@react-navigation/native', () => {
+  const actualNav = jest.requireActual('@react-navigation/native');
+  return {
+    ...actualNav,
+    useNavigation: () => ({
+      navigate: mockedNavigate,
+    }),
+  };
+});
 
 const cryptoMock: CryptoCurrency = {
   id: '1',
@@ -31,5 +40,20 @@ describe('CryptoItem', () => {
     expect(name).toBeTruthy();
     expect(price).toBeTruthy();
     expect(priceChange).toBeTruthy();
+  });
+
+  it('should dispatch setCryptoCurrency and navigate to CryptoDetails on press', () => {
+    const {getByTestId, store} = renderWithProviders(
+      <CryptoItem {...cryptoMock} />,
+    );
+
+    const rippleContainer = getByTestId('ripple-container');
+
+    fireEvent.press(rippleContainer);
+
+    expect(store.getState().cryptoCurrencies.selectedCurrency).toEqual(
+      cryptoMock,
+    );
+    expect(mockedNavigate).toHaveBeenCalledWith('CryptoDetails');
   });
 });

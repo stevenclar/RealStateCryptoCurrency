@@ -2,10 +2,12 @@ import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
   container: {
-    margin: 8,
-    padding: 8,
+    paddingHorizontal: 16,
   },
   list: {
     height: '100%',
+  },
+  searchInput: {
+    marginVertical: 16,
   },
 });
