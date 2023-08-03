@@ -41,7 +41,10 @@ export const cryptoCurrencySlice = createSlice({
         state.isListEnding = true;
         return;
       }
-      state.cryptoCurrencies = [...state.cryptoCurrencies, ...action.payload];
+      state.cryptoCurrencies = [
+        ...state.cryptoCurrencies,
+        ...action.payload,
+      ].sort(crypto => crypto.rank);
     });
     builder.addCase(fetchCryptoCurrency.rejected, state => {
       state.status = 'failed';

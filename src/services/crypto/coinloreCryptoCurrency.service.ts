@@ -20,6 +20,7 @@ class CoinloreCryptoCurrencyService implements CryptoCurrencyService {
           return {
             id: cryptoCurrency.id,
             abbreviation: cryptoCurrency.symbol,
+            rank: cryptoCurrency.rank,
             name: cryptoCurrency.name,
             price: cryptoCurrency.price_usd,
             lastHourChange: cryptoCurrency.percent_change_1h,
