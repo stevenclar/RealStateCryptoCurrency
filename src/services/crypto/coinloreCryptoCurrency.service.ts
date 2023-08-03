@@ -4,6 +4,16 @@ import {getRandomNumber} from '../../utils/number/randomNumber';
 
 const LIMIT = 40;
 
+/**
+ * CoinloreCryptoCurrencyService class
+ * @class
+ * @implements {CryptoCurrencyService}
+ * @exports
+ * @default
+ * @name CoinloreCryptoCurrencyService
+ * @description
+ * CoinloreCryptoCurrencyService class for fetching crypto currencies from Coinlore
+ */
 class CoinloreCryptoCurrencyService implements CryptoCurrencyService {
   async getCryptoCurrencies(page = 0): Promise<CryptoCurrency[]> {
     try {
@@ -47,7 +57,6 @@ class CoinloreCryptoCurrencyService implements CryptoCurrencyService {
    * mock historical data from the last 30 days
    * @returns {number[]} Array of random numbers
    */
-
   private mockHistoricalData(): number[] {
     const data = [];
     for (let i = 0; i < 30; i++) {

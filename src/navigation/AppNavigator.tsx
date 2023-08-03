@@ -7,6 +7,7 @@ import WelcomeScreen from '../screens/WelcomeScreen';
 import CryptoDetailsScreen from '../screens/CryptoDetailScreen';
 import {useTheme} from 'react-native-paper';
 
+// RootStackParamList is a type that defines the routes of the app.
 export type RootStackParamList = {
   Welcome: undefined;
   Home: undefined;

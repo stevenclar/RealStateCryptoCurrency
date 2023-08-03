@@ -1,6 +1,7 @@
 import {useContext} from 'react';
 import {Container, ContainerContext} from '.';
 
+// Custom hook to get the container instance
 const useContainer = (): Container => {
   const container = useContext(ContainerContext);
   if (!container) {

@@ -4,8 +4,13 @@ import {
   configureStore,
 } from '@reduxjs/toolkit';
 import {cryptoCurrencySlice} from './cryptoCurrency/cryptoCurrencySlice';
-// ...
 
+/**
+ * Root reducer
+ * @type {Reducer}
+ * @description
+ * Root reducer for the app
+ */
 const rootReducer = combineReducers({
   cryptoCurrencies: cryptoCurrencySlice.reducer,
 });

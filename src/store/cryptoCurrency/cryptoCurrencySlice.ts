@@ -23,6 +23,7 @@ const initialState: CryptoCurrencyState = {
   status: CurrencyStatus.IDLE,
 };
 
+//Send a request to get crypto currencies from the IoC container
 export const fetchCryptoCurrency = createAsyncThunk(
   'cryptoCurrencies/fetchCryptoCurrency',
   async (getCryptoCurrencies: Promise<CryptoCurrency[]>) => {

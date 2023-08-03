@@ -7,6 +7,7 @@ interface Container {
 
 const ContainerContext = createContext<Container | null>(null);
 
+// Container implementation
 const Container: Container = {
   registry: {},
   resolve<T>(identifier: string): T {
