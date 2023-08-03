@@ -3,12 +3,14 @@ import {CryptoCurrency} from '../../interfaces/CryptoCurrency';
 
 export interface CryptoCurrencyState {
   cryptoCurrencies: CryptoCurrency[];
+  selectedCurrency: CryptoCurrency | null;
   isListEnding: boolean;
   status: 'idle' | 'loading' | 'failed';
 }
 
 const initialState: CryptoCurrencyState = {
   cryptoCurrencies: [],
+  selectedCurrency: null,
   isListEnding: false,
   status: 'idle',
 };
@@ -25,8 +27,8 @@ export const cryptoCurrencySlice = createSlice({
   name: 'cryptoCurrencies',
   initialState,
   reducers: {
-    setCryptoCurrencies: (state, action) => {
-      state.cryptoCurrencies = action.payload;
+    setCryptoCurrency: (state, action) => {
+      state.selectedCurrency = action.payload;
     },
   },
   extraReducers: builder => {
@@ -47,4 +49,4 @@ export const cryptoCurrencySlice = createSlice({
   },
 });
 
-export const {setCryptoCurrencies} = cryptoCurrencySlice.actions;
+export const {setCryptoCurrency} = cryptoCurrencySlice.actions;

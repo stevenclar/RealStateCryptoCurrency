@@ -13,4 +13,5 @@ export interface CryptoCurrency {
   csupply?: number;
   tsupply?: number;
   msupply?: number;
+  historicalData?: number[];
 }

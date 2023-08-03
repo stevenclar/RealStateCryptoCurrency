@@ -10,7 +10,7 @@ import {useTheme} from 'react-native-paper';
 export type RootStackParamList = {
   Welcome: undefined;
   Home: undefined;
-  CryptoDetails: {symbol: string};
+  CryptoDetails: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();

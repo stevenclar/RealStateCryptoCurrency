@@ -1,5 +1,6 @@
 import {CryptoCurrency} from '../../interfaces/CryptoCurrency';
 import CryptoCurrencyService from '.';
+import {getRandomNumber} from '../../utils/number/randomNumber';
 
 const LIMIT = 40;
 
@@ -31,6 +32,7 @@ class CoinloreCryptoCurrencyService implements CryptoCurrencyService {
             csupply: cryptoCurrency.csupply,
             tsupply: cryptoCurrency.tsupply,
             msupply: cryptoCurrency.msupply,
+            historicalData: this.mockHistoricalData(),
           };
         },
       );
@@ -38,6 +40,19 @@ class CoinloreCryptoCurrencyService implements CryptoCurrencyService {
     } catch (error: any) {
       throw new Error('Error while fetching getCurrencies: ' + error.message);
     }
+  }
+
+  /**
+   * mock historical data from the last 30 days
+   * @returns {number[]} Array of random numbers
+   */
+
+  private mockHistoricalData(): number[] {
+    const data = [];
+    for (let i = 0; i < 30; i++) {
+      data.push(getRandomNumber(-50000, 50000));
+    }
+    return data;
   }
 }
 
