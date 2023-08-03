@@ -6,11 +6,11 @@ import theme from './themes/default';
 import ContainerProvider from './container/ContainerProvider';
 import {Container} from './container';
 import './container/containerConfig';
-import {store} from './store';
+import {setupStore} from './store';
 
 const App = (): JSX.Element => {
   return (
-    <Provider store={store}>
+    <Provider store={setupStore()}>
       <PaperProvider theme={theme}>
         <ContainerProvider container={Container}>
           <AppNavigator />
